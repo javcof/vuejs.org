@@ -122,5 +122,23 @@
                 }
             })
         </script>
+
+        <div id="app-9">
+            <a :href="url">Shorthand Url</a>
+            <a @click="shortHand">Shorhand Links</a>
+        </div>
+        <script>
+            var app9 = new Vue({
+                el: '#app-9',
+                data: {
+                    url: 'https://vuejs.org'
+                },
+                methods: {
+                    shortHand: function() {
+                        alert('short hand method.')
+                    }
+                }
+            })
+        </script>
     </body>
 </html>
