@@ -1,0 +1,126 @@
+<!doctype html>
+<html>
+    <head>
+        <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    </head>
+    <body>
+        <div id="app-1">
+            <span>Message: {{ msg }}</span>
+        </div>
+        <script>
+            var app1 = new Vue({
+                el: '#app-1',
+                data: {
+                    msg: 'Text interpolation data binding.'
+                }
+            })
+        </script>
+
+        <div id="app-2">
+            <span v-once>This will never change: {{ msg }}</span>
+        </div>
+        <script>
+            var app2 = new Vue({
+                el: '#app-2',
+                data: {
+                    msg: 'One-time interpolation data binding.'
+                }
+            })
+        </script>
+
+        <div id="app-3">
+            <p>Using mustaches: {{ rawHtml }}</p>
+            <p>Using v-html directive: <span v-html="rawHtml"></span></p>
+        </div>
+        <script>
+            var app3 = new Vue({
+                el: '#app-3',
+                data: {
+                    rawHtml: '<span style="color: red">This should be red.</span>'
+                }
+            })
+        </script>
+
+        <div id="app-4">
+            <div v-bind:id="dynamicId"></div>
+        </div>
+        <script>
+            var app4 = new Vue({
+                el: '#app-4',
+                data: {
+                    dynamicId: 1
+                }
+            })
+        </script>
+
+        <div id="app-5">
+            <!--
+                If isButtonDisabled has the value of null, undefined, or false,
+                the disabled attribute will not even be included in the rendered
+                <button> element
+            -->
+            <button v-bind:disabled="isButtonDisabled">Button</button>
+        </div>
+        <script>
+            var app5 = new Vue({
+                el: '#app-5',
+                data: {
+                    isButtonDisabled: true
+                }
+            })
+        </script>
+
+        <div id="app-6">
+            <div>{{ number + 1 }}</div>
+            <div>{{ ok ? 'YES' : 'NO' }}</div>
+            <div>{{ message.split('').reverse().join('') }}</div>
+            <div v-bind:id="'list-' + id"></div>
+        </div>
+        <script>
+            var app6 = new Vue({
+                el: '#app-6',
+                data: {
+                    number: 0,
+                    ok: false,
+                    message: 'Hello jeffreyzhang.',
+                    id: 1
+                }
+            })
+        </script>
+
+        <div id="app-7">
+            <a v-bind:href="url">Other links</a>
+            <a v-on:click="doSomething">Button links</a>
+        </div>
+        <script>
+            var app7 = new Vue({
+                el: '#app-7',
+                data: {
+                    url: 'http://vuejs.org'
+                },
+                methods: {
+                    doSomething: function() {
+                        alert('doSomething');
+                    }
+                }
+            })
+        </script>
+
+        <div id="app-8">
+            <form v-on:submit.prevent="onSubmit">
+                Name: <input type="text">
+                <input type="submit">
+            </form>
+        </div>
+        <script>
+            var app8 = new Vue({
+                el: '#app-8',
+                methods: {
+                    onSubmit: function() {
+                        alert('obSubmit')
+                    }
+                }
+            })
+        </script>
+    </body>
+</html>
