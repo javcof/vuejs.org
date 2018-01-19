@@ -1,0 +1,104 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Class and Style Bindings</title>
+        <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    </head>
+    <body>
+        <p>Pass an object to v-bind:class to dynamically toggle classes</p>
+        <div id="app-1">
+            <div class="static"
+                v-bind:class="{ active: isActive, 'text-danger': hasError }"></div>
+        </div>
+        <script>
+            var app1 = new Vue({
+                el: '#app-1',
+                data: {
+                    isActive: true,
+                    hasError: false
+                }
+            })
+        </script>
+
+        <p>The bound object doesn't have to be inline</p>
+        <div id="app-2">
+            <div v-bind:class="classObject"></div>
+        </div>
+        <script>
+            var app2 = new Vue({
+                el: '#app-2',
+                data: {
+                    classObject: {
+                        active: true,
+                        'text-danger': false
+                    }
+                }
+            })
+        </script>
+
+        <p>Bind to a computed property</p>
+        <div id="app-3">
+            <div v-bind:class="classObject"></div>
+        </div>
+        <script>
+            var app3 = new Vue({
+                el: '#app-3',
+                data: {
+                    isActive: true,
+                    error: null
+                },
+                computed: {
+                    classObject: function() {
+                        return {
+                            active: this.isActive && !this.error,
+                            'text-danger': this.error && this.error.type === 'fatal'
+                        }
+                    }
+                }
+            })
+        </script>
+
+        <p>We can pass an array to v-bind:class to apply a list of classes</p>
+        <div id="app-4">
+            <div v-bind:class="[activeClass, errorClass]"></div>
+        </div>
+        <script>
+            var app4 = new Vue({
+                el: '#app-4',
+                data: {
+                    activeClass: 'active',
+                    errorClass: 'text-danger'
+                }
+            })
+        </script>
+
+        <p>Toggle a class in the list conditionally</p>
+        <div id="app-5">
+            <div v-bind:class="[isActive ? activeClass : '', errorClass]"></div>
+        </div>
+        <script>
+            var app5 = new Vue({
+                el: '#app-5',
+                data: {
+                    isActive: true,
+                    activeClass: 'active',
+                    errorClass: 'text-danger'
+                }
+            })
+        </script>
+
+        <p>To use the object syntax inside array syntax</p>
+        <div id="app-6">
+            <div v-bind:class="[{ active: isActive }, errorClass]"></div>
+        </div>
+        <script>
+            var app6 = new Vue({
+                el: '#app-6',
+                data: {
+                    isActive: true,
+                    errorClass: 'text-danger'
+                }
+            })
+        </script>
+    </body>
+</html>
