@@ -100,5 +100,109 @@
                 }
             })
         </script>
+
+        <p>When u use the class attribute on a custom component, those classes will be added to the component's root element</p>
+        <div id="app-7">
+            <my-component class="baz boo"></my-component>
+        </div>
+        <script>
+            Vue.component('my-component', {
+                template: '<p class="foo bar">Hi</p>'
+            })
+
+            var app7 = new Vue({
+                el: '#app-7'
+            })
+        </script>
+
+        <p>The same is true for class bindings</p>
+        <div id="app-8">
+            <my-component v-bind:class="{ active: isActive }"></my-component>
+        </div>
+        <script>
+            var app8 = new Vue({
+                el: '#app-8',
+                data: {
+                    isActive: true
+                }
+            })
+        </script>
+
+        <p>The object syntax fpr v-bind:style is pretty straightforward</p>
+        <div id="app-9">
+            <div v-bind:style="{ color: activeColor, fontSize: fontSize + 'px' }"></div>
+        </div>
+        <script>
+            var app9 = new Vue({
+                el: '#app-9',
+                data: {
+                    activeColor: 'red',
+                    fontSize: 12
+                }
+            })
+        </script>
+
+        <p>It is often a good idea to bind o a style object directly so that the template is cleaner</p>
+        <div id="app-10">
+            <div v-bind:style="styleObject"></div>
+        </div>
+        <script>
+            var app10 = new Vue({
+                el: '#app-10',
+                data: {
+                    styleObject: {
+                        color: 'blue',
+                        fontSize: '13px'
+                    }
+                }
+            })
+        </script>
+
+        <p>The array syntax for v-bind:style allows u to apply multiple style objects to the same element</p>
+        <div id="app-11">
+            <div v-bind:style="[baseStyles, overridingStyles]"></div>
+        </div>
+        <script>
+            var app11 = new Vue({
+                el: '#app-11',
+                data: {
+                    baseStyles: {
+                        margin: 0,
+                        padding: 0,
+                        fontSize: '12px',
+                    },
+                    overridingStyles: {
+                        padding: '12px',
+                        lineHeight: '12px'
+                    }
+                }
+            })
+        </script>
+
+        <p>Vendor prefixes in v-bind:style</p>
+        <div id="app-12">
+            <div v-bind:style="{ fontSize: '12px', transform: transform }"></div>
+        </div>
+        <script>
+            var app12 = new Vue({
+                el: '#app-12',
+                data: {
+                    transform: 'rotate(7deg)'
+                }
+            })
+        </script>
+
+        <p>Multiple values</p>
+        <div id="app-13">
+            <div v-bind:style="{ display: ['-webkit', '-ms-flexbox'] }"></div>
+        </div>
+        <script>
+            var app14 = new Vue({
+                el: '#app-13',
+                data: {
+
+                }
+            })
+        </script>
     </body>
 </html>
