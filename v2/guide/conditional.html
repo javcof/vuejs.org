@@ -82,5 +82,76 @@
                 }
             })
         </script>
+
+        <p>Vue try to render elements as efficiently as possible, often re-using them instead of rendering from scratch</p>
+        <div id="app-6">
+            <template v-if="loginType === 'username'">
+                <lable>Username</label>
+                <input placeholder="Enter your username">
+            </template>
+            <template v-else>
+                <lable>Email</label>
+                <input placeholder="Enter your email address">
+            </template>
+            <button v-on:click="toggle">Toggle login type</button>
+        </div>
+        <script>
+            var app6 = new Vue({
+                el: '#app-6',
+                data: {
+                    loginType: 'email'
+                },
+                methods: {
+                    toggle: function() {
+                        this.loginType =
+                            this.loginType === 'username' ?
+                                'email' :
+                                'username'
+                    }
+                }
+
+            })
+        </script>
+
+        <p>Then switching the loginType in the code above will not erase what the user has already entered</p>
+        <div id="app-7">
+            <template v-if="loginType === 'username'">
+                <lable>Username</label>
+                <input placeholder="Enter your username" key="username-input">
+            </template>
+            <template v-else>
+                <lable>Email</label>
+                <input placeholder="Enter your email address" key="email-input">
+            </template>
+            <button v-on:click="toggle">Toggle login type</button>
+        </div>
+        <script>
+            var app7 = new Vue({
+                el: '#app-7',
+                data: {
+                    loginType: 'email'
+                },
+                methods: {
+                    toggle: function() {
+                        this.loginType =
+                            this.loginType === 'username' ?
+                                'email' :
+                                'username'
+                    }
+                }
+
+            })
+        </script>
+
+        <p>Another option for conditionally displaying an element is the v-show directive</p>
+        <h1 id="app-8" v-show="ok">Hello!</h1>
+        <script>
+            var app8 = new Vue({
+                el: '#app-8',
+                data: {
+                    ok: false
+                }
+            })
+        </script>
     </body>
 </html>
