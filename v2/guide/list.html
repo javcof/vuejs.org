@@ -1,0 +1,120 @@
+<!doctype html>
+<html>
+    <head>
+        <title>List Render</title>
+        <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    </head>
+    <body>
+        <p>We can use the v-for directive to render a list of items based on an array</p>
+        <div id="app-1">
+            <ul>
+                <li v-for="item in items">
+                    {{ item.message }}
+                </li>
+            </ul>
+        </div>
+        <script>
+            var app1 = new Vue({
+                el: '#app-1',
+                data: {
+                    items: [
+                        { message: 'Foo' },
+                        { message: 'Bar' }
+                    ]
+                }
+            })
+        </script>
+
+        <p>Inside v-for block we have full access to parent scope properties</p>
+        <ul id="app-2">
+            <li v-for="(item, index) in items">
+                {{ parentMessage }} - {{ index }} - {{ item.message }}
+            </li>
+        </ul>
+        <script>
+            var app2 = new Vue({
+                el: '#app-2',
+                data: {
+                    parentMessage: 'Parent',
+                    items: [
+                        { message: 'Foo' },
+                        { message: 'Bar' }
+                    ]
+                }
+            })
+        </script>
+
+        <p>You can also use of as the delimiter instead of in</p>
+        <ul id="app-3">
+            <li v-for="item of items">{{ item.message }}</li>
+        </ul>
+        <script>
+            var app3 = new Vue({
+                el: '#app-3',
+                data: {
+                    items: [
+                        { message: 'Foo' },
+                        { message: 'Bar' }
+                    ]
+                }
+            })
+        </script>
+
+        <p>You can also use v-for to iterate throught the properties of an object</p>
+        <ul id="app-4">
+            <li v-for="v in object">
+                {{ v }}
+            </li>
+        </ul>
+        <script>
+            var app4 = new Vue({
+                el: '#app-4',
+                data: {
+                    object: {
+                        firstName: 'Jeffrey',
+                        lastName: 'Zhang',
+                        age: 34
+                    }
+                }
+            })
+        </script>
+
+        <p>You can also provide a second argument for the key</p>
+        <ul id="app-5">
+            <li v-for="(value, key) in object">
+                {{ key }}: {{ value }}
+            </li>
+        </ul>
+        <script>
+            var app5 = new Vue({
+                el: '#app-5',
+                data: {
+                    object: {
+                        firstName: 'Tom',
+                        lastName: 'Xie',
+                        age: 30
+                    }
+                }
+            })
+        </script>
+
+        <p>And other for the index</p>
+        <ul id="app-6">
+            <li v-for="(v, k, i) in object">
+                {{ i }}. {{ k }}: {{ v }}
+            </li>
+        </ul>
+        <script>
+            var app6 = new Vue({
+                el: '#app-6',
+                data: {
+                    object: {
+                        firstName: 'Tom',
+                        lastName: 'Xie',
+                        age: 30
+                    }
+                }
+            })
+        </script>
+    </body>
+</html>
