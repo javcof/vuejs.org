@@ -116,5 +116,42 @@
                 }
             })
         </script>
+
+        <p>
+            To give Vue a hint so that it can track each node's identity,
+            and thus reuse reorder existing elements,
+            you need to provide a unique key attribute for each item.
+        </p>
+        <ul id="app-7">
+            <li v-for="(item, index) in items" :key="index">{{ index }} - {{ item.message }}</li>
+        </ul>
+        <script>
+            var app7 = new Vue({
+                el: '#app-7',
+                data: {
+                    items: [
+                        { message: 'Foo' },
+                        { message: 'Bar' }
+                    ]
+                }
+            })
+        </script>
+
+        <p>In comparison, there are also non-mutating methods,
+            which do not mutate the original array but always return a new array</p>
+        <ul id="app-8">
+            <li v-for="item in items">{{ item.message }}</li>
+        </ul>
+        <script>
+            var app8 = new Vue({
+                el: '#app-8',
+                data: {
+                    items: [
+                        { message: 'Foo' },
+                        { message: 'Bar' }
+                    ]
+                }
+            })
+        </script>
     </body>
 </html>
