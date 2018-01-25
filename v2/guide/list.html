@@ -191,6 +191,74 @@
             })
         </script>
 
-        <p>In such cases, you should create a fresh object with properties from both objects</p>
+        <p>Sometimes we want to display a filtered or sorted version of an array without actually mutating or resetting the original data</p>
+        <ul id="app-11">
+            <li v-for="n in evenNumbers">{{ n }}</li>
+        </ul>
+        <script>
+            var app11 = new Vue({
+                el: '#app-11',
+                data: {
+                    numbers: [1, 2, 3, 4, 5]
+                },
+                computed: {
+                    evenNumbers: function() {
+                        return this.numbers.filter(function(number) {
+                            return number % 2 === 0
+                        })
+                    }
+                }
+            })
+        </script>
+
+        <p>In situations where computed properties are not feasible,
+            you can user a method</p>
+        <ul id="app-12">
+            <li v-for="n in even(numbers)">{{ n }}</li>
+        </ul>
+        <script>
+            var app12 = new Vue({
+                el: '#app-12',
+                data: {
+                    numbers: [1, 2, 3, 4, 5, 6, 7, 8]
+                },
+                methods: {
+                    even: function() {
+                        return this.numbers.filter(function(n) {
+                            return n % 2 === 0
+                        })
+                    }
+                }
+            })
+        </script>
+
+        <p>v-for can also take an integer</p>
+        <div id="app-13">
+            <span v-for="n in 10">{{ n }}</span>
+        </div>
+        <script>
+            var app13 = new Vue({
+                el: '#app-13'
+            })
+        </script>
+
+        <p>Similar to template v-if, you can also use a &lt;template&gt; tag with v-for to render a block of multiple elements</p>
+        <ul id="app-14">
+            <template v-for="item in items">
+                <li>{{ item.msg }}</li>
+                <li class="divider"></li>
+            </template>
+        </ul>
+        <script>
+            var app14 = new Vue({
+                el: '#app-14',
+                data: {
+                    items: [
+                        { msg: 'Foo' },
+                        { msg: 'Bar' }
+                    ]
+                }
+            })
+        </script>
     </body>
 </html>
