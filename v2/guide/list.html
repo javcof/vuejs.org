@@ -153,5 +153,44 @@
                 }
             })
         </script>
+
+        <p>Vue cannot detect property addition deletion</p>
+        <div id="app-9">
+            <p>a: {{ a }}</p>
+            <!--
+            <p>b: {{ b }}</p>
+            -->
+        </div>
+        <script>
+            var app9 = new Vue({
+                el: '#app-9',
+                data: {
+                    // app9.a is now reactive
+                    a: 1
+                }
+            })
+
+            // app9.b is not reactive
+            app9.b = 2
+        </script>
+
+        <p>You could add a new property to the nested object</p>
+        <ul id="app-10">
+            <li v-for="(value, key) in userProfile">
+                {{ key }} - {{ value}}
+            </li>
+        </ul>
+        <script>
+            var app10 = new Vue({
+                el: '#app-10',
+                data: {
+                    userProfile: {
+                        name: 'Anika'
+                    }
+                }
+            })
+        </script>
+
+        <p>In such cases, you should create a fresh object with properties from both objects</p>
     </body>
 </html>
