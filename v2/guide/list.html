@@ -260,5 +260,105 @@
                 }
             })
         </script>
+
+        <p>When they exist on the same node, v-for has a higher priority then v-if</p>
+        <ul id="app-15">
+            <li v-for="todo in todos" v-if="!todo.isComplete">
+                {{ todo.id }} - {{ todo.title }}
+            </li>
+        </ul>
+        <script>
+            var app15 = new Vue({
+                el: '#app-15',
+                data: {
+                    todos: [
+                        { id: 1, title: 'Sina Wiebo', isComplete: true },
+                        { id: 2, title: 'Tencent Weixin', isComplete: false },
+                        { id: 3, title: 'Alibaba Alipay', isComplete: true }
+                    ]
+                }
+            })
+        </script>
+
+        <p>If instead, you intent is to conditionally skip execution of the loop, you can place the v-if on a wrapper element</p>
+        <div id="app-16">
+            <ul v-if="todos.length">
+                <li v-for="todo in todos">
+                    {{ todo.id }} - {{ todo.title }}
+                </li>
+            </ul>
+            <p v-else>No todos left!</p>
+        </div>
+        <script>
+            var app16 = new Vue({
+                el: '#app-16',
+                data: {
+                    todos: [
+                        { id: 1, title: 'Sina Wiebo', isComplete: true },
+                        { id: 2, title: 'Tencent Weixin', isComplete: false },
+                        { id: 3, title: 'Alibaba Alipay', isComplete: true }
+                    ]
+                }
+            })
+        </script>
+
+        <p>v-for with a component</p>
+        <div id="todo-app">
+            <input
+                v-model="newTodoText"
+                v-on:keyup.enter="addNewTodo"
+                placeholder="Add a todo">
+            <ul>
+                <li
+                    is="todo-item"
+                    v-for="(todo, index) in todos"
+                    v-bind:key="todo.id"
+                    v-bind:title="todo.title"
+                    v-on:remove="todos.splice(index, 1)">
+                </li>
+            </ul>
+        </div>
+        <script>
+            Vue.component('todo-item', {
+                template: '\
+                    <li>\
+                        {{ title }}\
+                        <button v-on:click="$emit(\'remove\')">X</button>\
+                    </li>\
+                ',
+                props: ['title']
+            })
+
+            new Vue({
+                el: '#todo-app',
+                data: {
+                    newTodoText: '',
+                    todos: [
+                        {
+                            id: 1,
+                            title: 'Do the dishes'
+                        },
+                        {
+                            id: 2,
+                            title: 'Take out the trash'
+                        },
+                        {
+                            id: 3,
+                            title: 'Mow the lawn'
+                        }
+                    ],
+                    nextTodoId: 4
+                },
+                methods: {
+                    addNewTodo: function() {
+                        this.todos.push({
+                            id: this.nextTodoId++,
+                            title: this.newTodoText
+                        })
+                        this.newTodoText = ''
+                    }
+                }
+            })
+        </script>
     </body>
 </html>
