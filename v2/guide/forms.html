@@ -147,5 +147,133 @@
                 }
             })
         </script>
+
+        <p>For radio, checkbox and select, the v-mode binding values are usually static strings(or booleans for checkbox)</p>
+        <div id="app-9">
+            <!-- `picked` is a string "a" when checked -->
+            <input type="radio" v-model="picked" value="a">{{ picked }}
+
+            <!-- `toggle` is either ture or false -->
+            <input type="checkbox" v-model="toggle">{{ toggle }}
+
+            <!-- `selected` is a string "abc" when selected -->
+            <select v-model="selected">
+                <option value="abc">ABC</option>
+            </select>
+            {{ selected }}
+        </div>
+        <script>
+            new Vue({
+                el: '#app-9',
+                data: {
+                    picked: '',
+                    toggle: false,
+                    selected: ''
+                }
+            })
+        </script>
+
+        <p>
+            The true-value and false-value attributes don't affect the input's value attribute,
+            because browsers don't include unchecked boxes in form submissions.
+        </p>
+        <div id="app-10">
+            <input
+                type="checkbox"
+                v-model="toggle"
+                true-value="yes"
+                false-value="no">
+            {{ toggle }}
+        </div>
+        <script>
+            new Vue({
+                el: '#app-10',
+                data: {
+                    toggle: false
+                }
+            })
+        </script>
+
+        <p>Value bindings: Raido</p>
+        <div id="app-11">
+            <input type="radio" v-model="pick" v-bind:value="a">
+            {{ pick }}
+        </div>
+        <script>
+            new Vue({
+                el: '#app-11',
+                data: {
+                    pick: '',
+                    a: 'A'
+                }
+            })
+        </script>
+
+        <p>Value bindings: Select options</p>
+        <div id="app-12">
+            <select v-model="selected">
+                <!-- inline object literal -->
+                <option v-bind:value="{ number: 123 }">123</option>
+            </select>
+            {{ selected.number }}
+        </div>
+        <script>
+            new Vue({
+                el: '#app-12',
+                data: {
+                    selected: {}
+                }
+            })
+        </script>
+
+        <p>
+            By default, v-model syncs the input with the data after each input event.
+        </p>
+        <div id="app-13">
+            <!-- synced after `change` instead of input -->
+            <input v-model.lazy="msg">{{ msg }}
+        </div>
+        <script>
+            new Vue({
+                el: '#app-13',
+                data: {
+                    msg: ''
+                }
+            })
+        </script>
+
+        <p>
+            If you want user input to be automatically typecast as a number,
+            you can add the number modifier to your v-model managed inputs
+        </p>
+        <div id="app-14">
+            <input v-model.number="age">
+            {{ age }}
+        </div>
+        <script>
+            var app14 = new Vue({
+                el: '#app-14',
+                data: {
+                    age: 0
+                }
+            })
+        </script>
+
+        <p>
+            If you want user input to be trimmed automatically,
+            you can add the trim modifier to your v-model managed inputs
+        </p>
+        <div id="app-15">
+            <input v-model.trim="msg">
+            {{ msg }}
+        </div>
+        <script>
+            new Vue({
+                el: '#app-15',
+                data: {
+                    msg: 'abcd'
+                }
+            })
+        </script>
     </body>
 </html>
