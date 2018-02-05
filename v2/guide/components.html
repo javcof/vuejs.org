@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Components</title>
+        <script src="../../node_modules/vue/dist/vue.js"></script>
+    </head>
+    <body>
+        <p>We can create a new Vue instance with:</p>
+        <div id="app-1">
+            <my-component></my-component>
+        </div>
+        <script>
+            // register
+            Vue.component('my-component', {
+                template: '<div>A custom component!</div>'
+            })
+
+            // create a root instance
+            new Vue({
+                el: '#app-1'
+            })
+        </script>
+    </body>
+</html>
