@@ -20,5 +20,26 @@
                 el: '#app-1'
             })
         </script>
+
+        <p>
+            You don't have to register every component globally.
+            You can make a component available only in the scope of another instance/component by registering it with components
+        </p>
+        <div id="app-2">
+            <my-child-component></my-child-component>
+        </div>
+        <script>
+            var Child = {
+                template: '<div>A custom component!</div>'
+            }
+
+            new Vue({
+                el: '#app-2',
+                components: {
+                    // <my-component> will only be available in parent's template
+                    'my-child-component': Child
+                }
+            })
+        </script>
     </body>
 </html>
