@@ -41,5 +41,98 @@
                 }
             })
         </script>
+
+        <p>DOM template parsing caveats</p>
+        <div id="app-3">
+            <table>
+                <tr is="my-row"></tr>
+            </table>
+        </div>
+        <script>
+            Vue.component('my-row', {
+                template: '<tr><td>Demo</td></tr>'
+            })
+
+            new Vue({
+                el: '#app-3',
+                data: {
+
+                }
+            })
+        </script>
+
+        <p>
+            Most of the options that can be passed into the Vue constructor can be used in a component,
+            with one special case: data must be a function.
+        </p>
+        <div id="app-4">
+            <my-component></my-component>
+            <my-component></my-component>
+            <my-component></my-component>
+        </div>
+        <script>
+            Vue.component('my-component', {
+                template: '<span>{{ message }}</span>',
+                data: function() {
+                    return {
+                        message: 'Demo'
+                    }
+                }
+            })
+
+            new Vue({
+                el: '#app-4',
+                data: {
+                    message: 'hello'
+                }
+            })
+        </script>
+
+        <p>It's good to understand why the rules exist though</p>
+        <div id="app-5">
+            <simple-counter></simple-counter>
+            <simple-counter></simple-counter>
+            <simple-counter></simple-counter>
+        </div>
+        <script>
+            var data = { counter: 0 }
+
+            Vue.component('simple-counter', {
+                template: '<button v-on:click="counter += 1">{{ counter }}</button>',
+                data: function() {
+                    return data
+                }
+            })
+
+            new Vue({
+                el: '#app-5'
+            })
+        </script>
+
+        <p>
+            Since all three component instance share the same data object,
+            incrementing one counter increments them all.
+        </p>
+        <div id="app-6">
+            <simple-counter></simple-counter>
+            <simple-counter></simple-counter>
+            <simple-counter></simple-counter>
+        </div>
+        <script>
+            var data = { counter: 0 }
+
+            Vue.component('simple-counter', {
+                template: '<button v-on:click="counter += 1">{{ counter }}</button>',
+                data: function() {
+                    return {
+                        counter: 0
+                    }
+                }
+            })
+
+            new Vue({
+                el: '#app-6'
+            })
+        </script>
     </body>
 </html>
