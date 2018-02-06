@@ -134,5 +134,46 @@
                 el: '#app-6'
             })
         </script>
+
+        <p>
+            A prop is a custom attribute for passing infomation from parent component.
+            A child component needs to explicitly declare the props it expects to receive using the props option
+        </p>
+        <div id="app-7">
+            <child message="hello"></child>
+        </div>
+        <script>
+            var app7 = Vue.component('child', {
+                // declare the props
+                props: ['message'],
+                // like data, the prop can be used inside templates and
+                // is also made available in the vm as this.message
+                template: '<span>{{ message }}</span>'
+            })
+
+            new Vue({
+                el: '#app-7'
+            })
+        </script>
+
+        <p>
+            HTML attribute are case-insensitive, so when using non-string template,
+            camelCased prop names need to use their kebab-case equivalents
+        </p>
+        <div id="app-8">
+            <!-- kebab-case in HTML -->
+            <child my-message="hello123"></child>
+        </div>
+        <script>
+            Vue.component('child', {
+                // camelCase in JavaScript
+                props: ['myMessage'],
+                template: '<span>{{ myMessage }}</span>'
+            })
+
+            new Vue({
+                el: '#app-8'
+            })
+        </script>
     </body>
 </html>
