@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Reactivity in Depth</title>
+        <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    </head>
+    <body>
+        <div id="app">
+            {{ message }}
+        </div>
+        <script>
+            var app = new Vue({
+                el: '#app',
+                data: {
+                    message: 'Hello Vue!'
+                }
+            })
+
+            app.message = 'new message'
+            console.log(app.$el.textContent)
+
+            Vue.nextTick(function() {
+                console.log(app.$el.textContent)
+            })
+        </script>
+    </body>
+</html>
