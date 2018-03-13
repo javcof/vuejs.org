@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Mixins</title>
+        <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    </head>
+    <body>
+        <script>
+            /*
+            // define a mixin object
+            var myMixin = {
+                created: function() {
+                    this.hello()
+                },
+                methods: {
+                    hello: function() {
+                        console.log('hello from mixin!')
+                    }
+                }
+            }
+
+            // define a component that uses this Mixins
+            var Component = Vue.extend({
+                mixins: [myMixin]
+            })
+
+            var component = new Component()
+            */
+
+            var mixin = {
+                data: function() {
+                    return {
+                        message: 'hello',
+                        foo: 'abc'
+                    }
+                }
+            }
+
+            new Vue({
+                mixin: [mixin],
+                data: function() {
+                    return {
+                        message: 'goodbye',
+                        bar: 'def'
+                    }
+                },
+                created: function() {
+                    console.log(this.$data);
+                }
+            })
+        </script>
+    </body>
+</html>
