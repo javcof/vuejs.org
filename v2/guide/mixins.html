@@ -27,6 +27,7 @@
             var component = new Component()
             */
 
+            /*
             var mixin = {
                 data: function() {
                     return {
@@ -48,6 +49,66 @@
                     console.log(this.$data);
                 }
             })
+            */
+
+            /*
+            var mixin = {
+                created: function() {
+                    console.log('mixin hook called')
+                }
+             }
+
+             new Vue({
+                 mixins: [mixin],
+                 created: function() {
+                     console.log('component hook called')
+                 }
+             })
+             */
+
+             /*
+             var mixin = {
+                 methods: {
+                     foo: function() {
+                         console.log('foo')
+                     },
+                     conflicting: function() {
+                         console.log('from mixin')
+                     }
+                 }
+             }
+
+             var vm = new Vue({
+                 mixins: [mixin],
+                 methods: {
+                     bar: function() {
+                         console.log('bar')
+                     },
+                     conflicting: function() {
+                         console.log('from self')
+                     }
+                 }
+             })
+
+             vm.foo()
+             vm.bar()
+             vm.conflicting()
+             */
+
+             // Global mixin
+             // inject a handler for `myOption` custom option
+             Vue.mixin({
+                 created: function() {
+                     var myOption = this.$options.myOption
+                     if (myOption) {
+                         console.log(myOption)
+                     }
+                 }
+             })
+
+             new Vue({
+                 myOption: 'hello'
+             })
         </script>
     </body>
 </html>
