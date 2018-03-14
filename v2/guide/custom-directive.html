@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Custom Directives</title>
+        <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    </head>
+    <body>
+        <div id="app">
+            <input>
+            <input v-focus>
+
+        </div>
+        <script>
+
+            //Register a global custom directive called `v-focus`
+            Vue.directive('focus', {
+                // When the bound element is inserted into the DOM
+                inserted: function(el) {
+                    el.focus()
+                }
+            })
+
+            new Vue({
+                el: '#app'
+            })
+        </script>
+    </body>
+</html>
