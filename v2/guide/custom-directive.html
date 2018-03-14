@@ -5,17 +5,18 @@
         <script src="https://cdn.jsdelivr.net/npm/vue"></script>
     </head>
     <body>
-        <div id="app" v-color-swatch="color" style="width: 100px; height: 100px;"></div>
+        <div id="app" v-demo="{ color: 'white', text: 'hello!' }"></div>
 
         <script>
-            Vue.directive('color-swatch', function(el, binding) {
-                el.style.backgroundColor = binding.value;
+            Vue.directive('demo', function(el, binding) {
+                console.log(binding.value.color)
+                console.log(binding.value.text)
             })
 
             new Vue({
                 el: '#app',
                 data: {
-                    color: 'red'
+
                 }
             })
         </script>
